@@ -6,6 +6,7 @@ import useMovementsStore from '../stores/movementsStore'
 import useAuthStore from '../stores/authStore'
 import { useToast } from 'react-native-toast-notifications'
 import { supabase } from '../lib/supabase'
+import { WITH_COMBO } from '../lib/env'
 
 const AmountEntryScreen = ({ navigation, route }) => {
   const [amount, setAmount] = useState('')
@@ -93,13 +94,13 @@ const AmountEntryScreen = ({ navigation, route }) => {
           </TouchableOpacity>
         ))}
       </View>
-      {typeOfPayment !== 'Cambio en caja' && (
+      {typeOfPayment !== 'Cambio en caja' && WITH_COMBO && (
         <TouchableOpacity
-          style={tw`flex flex-row items-center mt-5 gap-3 w-1/2`}
+          style={tw`flex flex-row items-center w-1/2 gap-3 mt-5`}
           onPress={() => setIsCombo(!isCombo)}
         >
-          <View style={tw`flex justify-center border border-black rounded-md w-6 h-6`} />
-          <Text style={tw`text-3xl absolute -left-1`}>{isCombo ? '✔️' : ''}</Text>
+          <View style={tw`flex justify-center w-6 h-6 border border-black rounded-md`} />
+          <Text style={tw`absolute text-3xl -left-1`}>{isCombo ? '✔️' : ''}</Text>
 
           <Text style={tw`text-lg`}>{isCombo ? 'Es un combo' : 'No es un combo'}</Text>
         </TouchableOpacity>
