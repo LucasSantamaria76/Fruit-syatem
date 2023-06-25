@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import Navigation from './src/navigation/Navigation'
+import { StatusBar } from 'expo-status-bar'
+import { ToastProvider } from 'react-native-toast-notifications'
+import tw from './src/lib/tailwind'
+import { useDeviceContext } from 'twrnc'
 
 export default function App() {
+  useDeviceContext(tw)
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <ToastProvider
+      placement='top'
+      textStyle={{ fontSize: 20 }}
+      duration={2000}
+      offsetTop={100}
+    >
+      <Navigation />
+      <StatusBar style='auto' />
+    </ToastProvider>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
