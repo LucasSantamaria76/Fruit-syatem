@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Belén frutas y verduras",
-    "slug": "Fruit-system",
-    "version": "1.0.0",
+    "name": "frutas y verduras",
+    "slug": "system-fruit",
+    "version": "1.0.2",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconFV.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -22,10 +22,15 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.belen.fv"
+      "package": "com.system.fv"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "afb35f28-2b15-49cb-9fce-1d9b660b1bb5"
+      }
     }
   }
 }
