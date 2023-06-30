@@ -13,7 +13,7 @@ El sistema cuenta con roles de usuarios.
 
 > Inicio de sesión
 
-![Inicio de sesión](https://res.cloudinary.com/dldd3gcr5/image/upload/v1688074144/login_xlp3q5.png)
+![Inicio de sesión](https://res.cloudinary.com/dldd3gcr5/image/upload/v1688083148/login_tqxekq.png)
 
 ---
 
@@ -23,7 +23,7 @@ El sistema cuenta con roles de usuarios.
 Aquí se elige el método de pago de la siguiente venta
 `
 
-![Pantalla principal](https://res.cloudinary.com/dldd3gcr5/image/upload/v1688073881/homeScreen_jh9e8g.png)
+![Pantalla principal](https://res.cloudinary.com/dldd3gcr5/image/upload/v1688083253/homeScreen_bhwdem.png)
 
 ---
 
@@ -33,7 +33,7 @@ Aquí se elige el método de pago de la siguiente venta
 Aquí se ingresa del importe de la venta
 `
 
-![Ingreso del importe](https://res.cloudinary.com/dldd3gcr5/image/upload/v1688074144/amountScreen_f1imib.png)
+![Ingreso del importe](https://res.cloudinary.com/dldd3gcr5/image/upload/v1688083357/amountScreen_ymtghq.png)
 
 ---
 
