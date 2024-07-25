@@ -35,10 +35,11 @@ const AdminUser = ({ navigation }) => {
     try {
       if (!user?.id) {
         const { error } = await register({
-          ...data
+          ...data,
+          email:`${data.username}@${data.username}`
         })
         const msg = error?.message?.includes('User already registered')
-          ? 'Este correo ya esta registrado'
+          ? 'Ese usuario ya existe'
           : error
         if (error) throw new Error(msg)
 

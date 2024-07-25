@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from "react";
 import {
   Button,
   Keyboard,
@@ -6,121 +6,120 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
-} from 'react-native'
-import { useForm, Controller, useFieldArray } from 'react-hook-form'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { inputStyleWithIcons } from '../styles'
-import tw from '../lib/tailwind'
-import ButtonGroup from './ButtonGroup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import useAuthStore from '../stores/authStore'
-import { ActivityIndicator } from 'react-native'
+  View,
+} from "react-native";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { inputStyleWithIcons } from "../styles";
+import tw from "../lib/tailwind";
+import ButtonGroup from "./ButtonGroup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import useAuthStore from "../stores/authStore";
+import { ActivityIndicator } from "react-native";
 
 const UserForm = ({ login, user, setUser, handleSave }) => {
-  const [secureTextEntry, setSecureTextEntry] = useState(true)
-  const loading = useAuthStore((state) => state.loading)
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const loading = useAuthStore((state) => state.loading);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const schema = yup.object({
-    username: !login && yup.string().trim().required('El nombre de usuario es requerido'),
+    username: yup.string().trim().required("El nombre de usuario es requerido"),
     role: !login && yup.string().required(),
-    email:
+    /* email:
       !user?.id &&
       yup
         .string()
         .lowercase()
         .trim()
-        .required('El correo es requerido')
-        .email('Formato de correo incorrecto'),
+        .required("El correo es requerido")
+        .email("Formato de correo incorrecto"), */
     password:
       !user?.id &&
       yup
         .string()
         .trim()
-        .required('La contraseña es requerida')
-        .min(6, 'Longitud mínima 6 caracteres')
-  })
+        .required("La contraseña es requerida")
+        .min(6, "Longitud mínima 6 caracteres"),
+  });
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     reset,
-    setValue
+    setValue,
   } = useForm({
     defaultValues: {
-      username: '',
-      role: 'OPERATOR',
-      email: '',
-      password: ''
+      username: "",
+      role: "OPERATOR",
+      //email: "",
+      password: "",
     },
-    resolver: yupResolver(schema)
-  })
+    resolver: yupResolver(schema),
+  });
 
   useEffect(() => {
-    setValue('username', user?.username || '')
-    setValue('role', user?.role || 'OPERATOR')
-  }, [user])
+    setValue("username", user?.username || "");
+    setValue("role", user?.role || "OPERATOR");
+  }, [user]);
 
   const onSubmit = (data) => {
-    handleSave(data)
-    Keyboard.dismiss()
-    reset()
-  }
+    handleSave(data);
+    Keyboard.dismiss();
+    reset();
+  };
 
   const cancelValues = () => {
-    reset()
-    setUser(null)
-  }
+    reset();
+    setUser(null);
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={tw`items-center w-11/12 gap-3 md:w-9/12`}>
+        <View style={tw`w-full`}>
+          <View style={[inputStyleWithIcons, tw`w-full md:h-16`]}>
+            <MaterialCommunityIcons
+              name="account-outline"
+              size={28}
+              color="black"
+            />
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  placeholder="Ingrese su nombre de usuario"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  returnKeyType="next"
+                  selectTextOnFocus
+                  style={tw`w-full h-full text-xl text-black md:text-3xl`}
+                  blurOnSubmit={false}
+                  onSubmitEditing={() => {
+                    emailRef.current?.focus();
+                  }}
+                />
+              )}
+              name="username"
+            />
+            <Text />
+          </View>
+          <Text style={tw`self-start text-xs text-red-500`}>
+            {errors.username && errors.username.message}
+          </Text>
+        </View>
         {!login && (
           <>
-            <View style={tw`w-full`}>
-              <View style={[inputStyleWithIcons, tw`w-full md:h-16`]}>
-                <MaterialCommunityIcons
-                  name='account-outline'
-                  size={28}
-                  color='black'
-                />
-                <Controller
-                  control={control}
-                  rules={{
-                    required: true
-                  }}
-                  render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                      placeholder='Ingrese su nombre de usuario'
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      value={value}
-                      returnKeyType='next'
-                      selectTextOnFocus
-                      style={tw`w-full h-full text-xl text-black md:text-3xl`}
-                      blurOnSubmit={false}
-                      onSubmitEditing={() => {
-                        emailRef.current?.focus()
-                      }}
-                    />
-                  )}
-                  name='username'
-                />
-                <Text />
-              </View>
-              <Text style={tw`self-start text-xs text-red-500`}>
-                {errors.username && errors.username.message}
-              </Text>
-            </View>
-
             <View>
               <Text style={tw`text-sm md:text-2xl`}>Seleccionar Rol</Text>
               <ButtonGroup
-                value={user?.role === 'ADMIN' ? 0 : 1}
+                value={user?.role === "ADMIN" ? 0 : 1}
                 setValue={setValue}
                 style={tw`justify-between w-full h-12 border border-black rounded-md md:h-16`}
               >
@@ -132,74 +131,74 @@ const UserForm = ({ login, user, setUser, handleSave }) => {
         )}
         {!user?.id && (
           <>
-            <View style={tw`w-full`}>
+            {/* <View style={tw`w-full`}>
               <View style={[inputStyleWithIcons, tw`w-full md:h-16`]}>
                 <MaterialCommunityIcons
-                  name='email-edit-outline'
+                  name="email-edit-outline"
                   size={28}
-                  color='black'
+                  color="black"
                 />
                 <Controller
                   control={control}
                   rules={{
-                    required: true
+                    required: true,
                   }}
                   render={({ field: { onChange, onBlur, value } }) => (
                     <TextInput
                       ref={emailRef}
-                      autoComplete='email'
-                      inputMode='email'
-                      placeholder='Ingrese su email'
+                      autoComplete="email"
+                      inputMode="email"
+                      placeholder="Ingrese su email"
                       style={tw`w-11/12 h-full text-xl text-black md:text-3xl`}
-                      returnKeyType='next'
+                      returnKeyType="next"
                       onBlur={onBlur}
                       onChangeText={onChange}
                       value={value}
                       blurOnSubmit={false}
                       onSubmitEditing={() => {
-                        passwordRef.current?.focus()
+                        passwordRef.current?.focus();
                       }}
                     />
                   )}
-                  name='email'
+                  name="email"
                 />
               </View>
               <Text style={tw`self-start text-xs text-red-500`}>
                 {errors.email && errors.email.message}
               </Text>
-            </View>
+            </View> */}
 
             <View style={tw`w-full`}>
               <View style={[inputStyleWithIcons, tw`w-full md:h-16`]}>
                 <MaterialCommunityIcons
-                  name='account-lock-outline'
+                  name="account-lock-outline"
                   size={28}
-                  color='black'
+                  color="black"
                 />
                 <Controller
                   control={control}
                   rules={{
-                    required: true
+                    required: true,
                   }}
                   render={({ field: { onChange, onBlur, value } }) => (
                     <TextInput
                       ref={passwordRef}
-                      placeholder='Ingrese su contraseña'
+                      placeholder="Ingrese su contraseña"
                       secureTextEntry={secureTextEntry}
                       style={tw`w-4/5 h-full text-xl text-black md:text-3xl`}
                       onBlur={onBlur}
                       onChangeText={onChange}
                       value={value}
-                      returnKeyType='done'
+                      returnKeyType="done"
                       onSubmitEditing={handleSubmit(onSubmit)}
                     />
                   )}
-                  name='password'
+                  name="password"
                 />
                 <MaterialCommunityIcons
-                  name={secureTextEntry ? 'eye-outline' : 'eye-off-outline'}
+                  name={secureTextEntry ? "eye-outline" : "eye-off-outline"}
                   size={28}
-                  color='black'
+                  color="black"
                   onPress={() => setSecureTextEntry(!secureTextEntry)}
                 />
               </View>
@@ -214,13 +213,14 @@ const UserForm = ({ login, user, setUser, handleSave }) => {
           style={tw`justify-center w-full h-12 bg-[#004d70] rounded-md md:h-20`}
         >
           {loading ? (
-            <ActivityIndicator
-              size='large'
-              color='#ffffff'
-            />
+            <ActivityIndicator size="large" color="#ffffff" />
           ) : (
             <Text style={tw`text-2xl text-center text-white md:text-4xl`}>
-              {login ? 'Ingresar' : user?.id ? 'Modificar usuario' : 'Crear nuevo usuario'}
+              {login
+                ? "Ingresar"
+                : user?.id
+                ? "Modificar usuario"
+                : "Crear nuevo usuario"}
             </Text>
           )}
         </TouchableOpacity>
@@ -229,11 +229,13 @@ const UserForm = ({ login, user, setUser, handleSave }) => {
             onPress={cancelValues}
             style={tw`justify-center w-full h-12 bg-yellow-500 rounded-md md:h-20`}
           >
-            <Text style={tw`text-2xl text-center text-white md:text-4xl`}>Cancelar</Text>
+            <Text style={tw`text-2xl text-center text-white md:text-4xl`}>
+              Cancelar
+            </Text>
           </TouchableOpacity>
         )}
       </View>
     </TouchableWithoutFeedback>
-  )
-}
-export default UserForm
+  );
+};
+export default UserForm;

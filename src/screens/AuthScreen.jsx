@@ -8,9 +8,9 @@ const AuthScreen = () => {
   const login = useAuthStore((state) => state.login)
   const toast = useToast()
 
-  const onSubmit = async ({ email, password }) => {
+  const onSubmit = async ({ username, password }) => {
     try {
-      const { error } = await login(email, password)
+      const { error } = await login(`${username}@${username}`, password)
       if (error) throw new Error(error)
     } catch (error) {
       toast.show(error.message || error, { type: 'danger' })
