@@ -1,5 +1,5 @@
-export const SUPABASE_URL = 'https://fnrggtvnecuajkfgookn.supabase.co'
+export const SUPABASE_URL = ''
 
-export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZucmdndHZuZWN1YWprZmdvb2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODQ2OTQ1NDQsImV4cCI6MjAwMDI3MDU0NH0.mN5aRqxbQ0IQk7AYX1szjkILxNMhIBCz9e5SSGvqUNg'
+export const SUPABASE_ANON_KEY = ''
 
 export const WITH_COMBO = false
