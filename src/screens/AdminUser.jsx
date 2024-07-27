@@ -102,15 +102,15 @@ const AdminUser = ({ navigation }) => {
     }
   }
 
-  return (
-    <SafeAreaView style={tw`flex items-center w-full h-full gap-4 mt-3`}>
+  return (    
+    <SafeAreaView >
+      <View style={tw`w-full md:w-9/12 items-center gap-3 `}>
       <UserForm
         login={false}
         setUser={setUser}
         user={user}
         handleSave={handleSave}
       />
-      <View style={tw`w-full md:w-9/12`}>
         <FlatList
           data={users}
           renderItem={({ item }) => (
@@ -124,7 +124,7 @@ const AdminUser = ({ navigation }) => {
           stickyHeaderIndices={[0]}
           ItemSeparatorComponent={<View style={tw`w-full h-[1px] bg-black`} />}
           keyExtractor={(item) => item.id}
-          style={tw`border border-black`}
+          style={tw`border border-black h-1/2`}
         />
       </View>
     </SafeAreaView>

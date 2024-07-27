@@ -21,7 +21,7 @@ import { ActivityIndicator } from "react-native";
 const UserForm = ({ login, user, setUser, handleSave }) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const loading = useAuthStore((state) => state.loading);
-  const emailRef = useRef(null);
+  const usernameRef = useRef(null);
   const passwordRef = useRef(null);
 
   const schema = yup.object({
@@ -93,6 +93,7 @@ const UserForm = ({ login, user, setUser, handleSave }) => {
               }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
+                  ref={usernameRef}
                   placeholder="Ingrese su nombre de usuario"
                   onBlur={onBlur}
                   onChangeText={onChange}
@@ -102,7 +103,7 @@ const UserForm = ({ login, user, setUser, handleSave }) => {
                   style={tw`w-full h-full text-xl text-black md:text-3xl`}
                   blurOnSubmit={false}
                   onSubmitEditing={() => {
-                    emailRef.current?.focus();
+                    passwordRef.current?.focus();
                   }}
                 />
               )}

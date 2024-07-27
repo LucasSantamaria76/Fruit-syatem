@@ -29,8 +29,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "afb35f28-2b15-49cb-9fce-1d9b660b1bb5"
+        "projectId": "397f3812-736d-4dbd-ae55-cce0ff5b7a62"
       }
-    }
+    },
+    "owner": "luc76"
   }
 }
